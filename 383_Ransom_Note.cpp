@@ -32,3 +32,28 @@ public:
         return true;
     }
 };
+
+//Solution2 : use Hash
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+        if(ransomNote.empty())
+            return true;
+        if(magazine.empty() && !ransomNote.empty()){
+            return false;
+        }
+        int hash_r[256] = {0};
+        int hash_m[256] = {0};
+        for(int i=0; i<ransomNote.length();i++){
+            hash_r[ransomNote[i]]++;
+        }
+        for(int i=0; i<magazine.length();i++){
+            hash_m[magazine[i]]++;
+        }
+        for(int i=0; i<256;i++){
+            if(hash_r[i] > hash_m[i])
+                return false;
+        }
+        return true;
+    }
+};
